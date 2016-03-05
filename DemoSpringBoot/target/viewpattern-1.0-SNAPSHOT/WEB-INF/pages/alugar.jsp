@@ -14,6 +14,7 @@
         <div class="dj-modal__section">
             <c:choose>
                 <c:when test="${Games == null}">
+
                     <div class="dj-titulo__left">
                         <h2>Atenção!</h2>
                     </div>
@@ -25,7 +26,9 @@
                     <h2 class="dj-titulo__left">Alugar jogo</h2>
                     <br>
                     <c:choose>
+
                         <c:when test="${Clientes == null}">
+
                             <h4>Ainda não há clientes cadastrados. Clique <a href="novoCliente.jsp">aqui</a> para
                                 cadastrar!</h4>
                             <br>
@@ -109,7 +112,9 @@
                     <h5>Data de devolução: ${dataDevolucaoFormatada}</h5>
                     <br>
                     <div class="text-right dj-button__submit">
-                        <input type="submit" class="btn btn-primary btn-lg" value="Alugar"><br><br>
+
+                        <input type="submit" class="btn btn-primary btn-lg" value="Alugar" <c:if test="${clientes == null}">disabled=""</c:if>><br><br>
+
                         </div>
                 </c:otherwise>
             </c:choose>
