@@ -15,6 +15,7 @@ import dijalmasilva.integrationpattern.gerenciadores.GerenciadorGame;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -47,6 +48,16 @@ public class CadastroController {
         }
         
         return null;
+    }
+    
+    @RequestMapping(value = "/aluguel/Cliente", method = RequestMethod.POST)
+    public @ResponseBody String addClienteNoAluguel(Cliente c){
+        GerenciadorCliente gc = new GerenciadorCliente();
+        if (gc.addCliente(c)){
+            return "Cliente cadastrado com sucesso!";
+        }else{
+            return "Erro ao cadastrar cliente!";
+        }
     }
     
     @RequestMapping(value = "/Aluguel", method = RequestMethod.POST)

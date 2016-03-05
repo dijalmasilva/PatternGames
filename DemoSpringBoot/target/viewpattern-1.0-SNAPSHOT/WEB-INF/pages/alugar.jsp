@@ -34,6 +34,9 @@
                             <br>
                         </c:when>
                         <c:otherwise>
+                            <div id="result">
+                                
+                            </div><br>
                             <div class="form-group dj-form__input">
                                 <label for="buscar">Buscar clinte:</label>
                                 <input class="form-control" id="buscar" name="buscar" autofocus="">
@@ -113,8 +116,7 @@
                     <br>
                     <div class="text-right dj-button__submit">
 
-                        <input type="submit" class="btn btn-primary btn-lg" value="Alugar" <c:if test="${clientes == null}">disabled=""</c:if>><br><br>
-
+                        <input type="submit" class="btn btn-primary btn-lg" value="Alugar" <c:if test="${Clientes == null}">disabled=""</c:if>><br><br>
                         </div>
                 </c:otherwise>
             </c:choose>
