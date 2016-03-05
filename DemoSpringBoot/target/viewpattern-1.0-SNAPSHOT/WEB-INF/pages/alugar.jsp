@@ -96,7 +96,7 @@
                     </form>
                     <h4>Informações complementares</h4>
                     <c:choose>
-                        <c:when test="${dia eq 'especial'}">
+                        <c:when test="${dia == 'ESPECIAL'}">
                             <h5>Valor a ser pago: 5 R$ </h5>
                             <h5>Duração de aluguel: 2 dias </h5>
                         </c:when>

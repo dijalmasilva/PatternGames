@@ -7,18 +7,14 @@
 package dijalmasilva.viewpattern.controller;
 
 import dijalmasilva.businesspattern.entidades.Aluguel;
-import dijalmasilva.businesspattern.entidades.Cliente;
 import dijalmasilva.businesspattern.entidades.Game;
-import dijalmasilva.businesspattern.enums.TipoAluguel;
 import dijalmasilva.integrationpattern.gerenciadores.GerenciadorAluguel;
 import dijalmasilva.integrationpattern.gerenciadores.GerenciadorCliente;
-import dijalmasilva.integrationpattern.gerenciadores.GerenciadorDevolucao;
 import dijalmasilva.integrationpattern.gerenciadores.GerenciadorGame;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 
@@ -41,7 +37,7 @@ public class CentralController {
         request.getSession().setAttribute("Clientes", gc.all());
         Aluguel a = new Aluguel();
         GerenciadorAluguel ga = new GerenciadorAluguel();
-        request.setAttribute("dia", ga.tipoDeAluguel(a));
+        request.setAttribute("dia", ga.tipoDeAluguel(a).toString());
         request.setAttribute("dataDevolucaoFormatada", ga.retornaDataFormatada(a));
         return "alugar";
     }
