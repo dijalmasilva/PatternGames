@@ -67,5 +67,6 @@ public class CentralController {
     @RequestMapping(value = "/novoCliente")
     public String newClient(){
         return "novoCliente";
+        
     }
 }
