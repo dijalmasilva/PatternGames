@@ -19,7 +19,7 @@
                         <h2>Atenção!</h2>
                     </div>
                     <br>
-                    <h4>Ainda não há jogos cadastrados. Clique <a href="novoJogo">aqui</a> para
+                    <h4>Ainda não há jogos cadastrados. Clique <a href="/home/novoJogo">aqui</a> para
                         cadastrar!</h4>
                     </c:when>
                     <c:otherwise>
@@ -29,16 +29,16 @@
 
                         <c:when test="${Clientes == null}">
 
-                            <h4>Ainda não há clientes cadastrados. Clique <a href="novoCliente.jsp">aqui</a> para
+                            <h4>Ainda não há clientes cadastrados. Clique <a href="/home/novoCliente">aqui</a> para
                                 cadastrar!</h4>
                             <br>
                         </c:when>
                         <c:otherwise>
-                            <div id="result">
-                                
+                            <div>
+                                <h3>${result}</h3>
                             </div><br>
                             <div class="form-group dj-form__input">
-                                <label for="buscar">Buscar clinte:</label>
+                                <label for="buscar">Buscar cliente:</label>
                                 <input class="form-control" id="buscar" name="buscar" autofocus="">
                                 <div class="text-right">
                                     <button data-toggle="modal" data-target="#modal" class="btn btn-default btn-sm">Novo Cliente</button>
@@ -57,7 +57,7 @@
                                     </thead>
                                     <tbody>
                                         <c:forEach items="${Clientes}" var="cliente">
-                                            <tr>
+                                            <tr onclick="setarCliente('${cliente.cpf}')">
                                                 <td>${cliente.nome}</td>
                                                 <td>${cliente.email}</td>
                                                 <td>${cliente.cpf}</td>
@@ -85,7 +85,7 @@
                             </thead>
                             <tbody>
                                 <c:forEach items="${Games}" var="game">
-                                    <tr>
+                                    <tr onclick="setarGame(${game.id})">
                                         <td>${game.id}</td>
                                         <td>${game.nome}</td>
                                         <td>${game.genero}</td>
@@ -96,8 +96,8 @@
                     </div>
                     <br>
                     <form action="/novo/Aluguel" method="post" class="invisible">
-                        <input type="text" name="cpfCliente" id="cpfCliente">
-                        <input type="text" name="idJogo" id="idJogo">
+                        <input type="text" name="cpf_cliente" id="cpf_cliente" value="">
+                        <input type="number" name="id_jogo" id="id_jogo" value="">
                         <input type="submit" id="submeterAluguel">
                     </form>
                     <h4>Informações complementares</h4>
@@ -115,14 +115,13 @@
                     <h5>Data de devolução: ${dataDevolucaoFormatada}</h5>
                     <br>
                     <div class="text-right dj-button__submit">
-
-                        <input type="submit" class="btn btn-primary btn-lg" value="Alugar" <c:if test="${Clientes == null}">disabled=""</c:if>><br><br>
-                        </div>
+                        <button class="btn btn-primary btn-lg" value="Alugar" onclick="submeterAluguel()" <c:if test="${Clientes == null}">disabled=""</c:if>><br><br>
+                    </div>
                 </c:otherwise>
             </c:choose>
             <br>
             <h4><a href="/home">Voltar ao início</a></h4>
         </div>
     </body>
-    
+
 </html>

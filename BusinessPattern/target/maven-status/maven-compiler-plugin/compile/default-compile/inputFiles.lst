@@ -13,7 +13,7 @@
 /home/dijalma/MEGA/Workspace/PatternGames/BusinessPattern/src/main/java/dijalmasilva/businesspattern/factory/FactoryImpl.java
 /home/dijalma/MEGA/Workspace/PatternGames/BusinessPattern/src/main/java/dijalmasilva/businesspattern/enums/TipoAluguel.java
 /home/dijalma/MEGA/Workspace/PatternGames/BusinessPattern/src/main/java/dijalmasilva/businesspattern/interfaces/DaoGame.java
-/home/dijalma/MEGA/Workspace/PatternGames/BusinessPattern/src/main/java/dijalmasilva/businesspattern/entidades/ConvertDate.java
+/home/dijalma/MEGA/Workspace/PatternGames/BusinessPattern/src/main/java/dijalmasilva/businesspattern/entidades/LocalDateConverter.java
 /home/dijalma/MEGA/Workspace/PatternGames/BusinessPattern/src/main/java/dijalmasilva/businesspattern/entidades/Cliente.java
 /home/dijalma/MEGA/Workspace/PatternGames/BusinessPattern/src/main/java/dijalmasilva/businesspattern/interfaces/DevolverStrategy.java
 /home/dijalma/MEGA/Workspace/PatternGames/BusinessPattern/src/main/java/dijalmasilva/businesspattern/jpa/DaoClienteImpl.java

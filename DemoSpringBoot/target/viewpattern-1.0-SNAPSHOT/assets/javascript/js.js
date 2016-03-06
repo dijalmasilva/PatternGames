@@ -10,22 +10,50 @@ $(document).ready(function () {
 });
 
 function cadastrarCliente() {
-    var form = new FormData();
-    form.append("nome", $("#nome").val());
-    form.append("cpf", $("#cpf").val());
-    form.append("email", $('#email').val());
+    var formulario = document.getElementById('formCliente');
+    formulario.onsubmit = function (event) {
+        event.preventDefault();
+        var formData = new FormData(document.getElementById('formCliente'));
+        
+//        $.ajax({
+//            processData: false,
+//            cache: false,
+//            contentType: false,
+//            data: formData,
+//            type: 'post',
+//            url: '/addCliente',
+//            sucess: function (result) {
+//                console.log(result);
+//                $('#result').text(result);
+//            },
+//            done: function (result) {
+//                console.log('2:' + result);
+//                $('#result').text(result);
+//            }
+//        });
+        var req = new XMLHttpRequest();
+        req.open("POST", "/addCliente", false);
+        req.send(formData);
+        console.log(req.responseText);
+    };
+}
+//    var nome = $("#nome").val();
+//    var cpf = $("#cpf").val();
+//    var email = $('#email').val();
+//    formData.append("nome", nome);
+//    formData.append("cpf", cpf);
+//    formData.append("email", email);
 
-    $.ajax({
-        url: '/novo/aluguel/Cliente',
-        data: form,
-        success: function (data) {
-            $('result').text(data);
-        },
-        beforeSend: function () {
-            //
-        },
-        complete: function () {
-            console.log("Função terminada!");
-        }
-    });
+function setarCliente(cpf){
+    $('#cpf_cliente').val(cpf+"");
+    console.log("Cpf setado: " + cpf);
+}
+
+function setarGame(id){
+    $('#id_jogo').val(id);
+    console.log("Id_game setado: " + id);
+}
+
+function submeterAluguel(){
+    $('#submeterAluguel').trigger("click");
 }

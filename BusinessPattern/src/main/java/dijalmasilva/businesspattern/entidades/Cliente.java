@@ -72,11 +72,15 @@ public class Cliente implements Serializable, Observer<Game>{
         this.nome = nome;
     }
 
-    
     @Override
     public void update(Game object) {
         //Notifica cliente sobre alteração no jogo
         System.out.println("O jogo "+object.getNome()+" está disponível!");
     }
-    
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "id=" + id + ", cpf=" + cpf + ", email=" + email + ", nome=" + nome + '}';
+    }
+
 }

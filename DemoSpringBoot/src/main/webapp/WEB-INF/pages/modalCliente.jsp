@@ -15,8 +15,7 @@
                 <h2 class="modal-title">Novo Cliente</h2>
             </div>
             <div class="modal-body">
-                <form method="post" class="form-group">
-
+                <form class="form-group" method="post" action="/novo/ClienteFast">
                     <div class="form-group dj-form__input">
                         <label for="nome">Nome:</label>
                         <input class="dj-button form-control" id="nome" name="nome" autofocus="">
@@ -33,7 +32,7 @@
                     </div>
                     <br><br>
                     <div class="text-right dj-button__submit">
-                        <button type="submit" onclick="cadastrarCliente()" class="btn btn-primary btn-lg">Cadastrar</button>
+                        <input type="submit" class="btn btn-primary btn-lg" value="Cadastrar"/>
                     </div>
                 </form>
             </div>

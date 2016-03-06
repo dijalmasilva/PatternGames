@@ -12,10 +12,15 @@ import dijalmasilva.businesspattern.entidades.Game;
 import dijalmasilva.integrationpattern.gerenciadores.GerenciadorAluguel;
 import dijalmasilva.integrationpattern.gerenciadores.GerenciadorCliente;
 import dijalmasilva.integrationpattern.gerenciadores.GerenciadorGame;
+import java.io.IOException;
+import java.time.LocalDate;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -50,26 +55,39 @@ public class CadastroController {
         return null;
     }
     
-    @RequestMapping(value = "/aluguel/Cliente", method = RequestMethod.POST)
-    public @ResponseBody String addClienteNoAluguel(Cliente c){
+    @RequestMapping(value = "/ClienteFast", method = RequestMethod.POST)
+    public void addCliente2(HttpServletRequest req, HttpServletResponse resp, Cliente c) throws IOException, ServletException{
         GerenciadorCliente gc = new GerenciadorCliente();
         if (gc.addCliente(c)){
-            return "Cliente cadastrado com sucesso!";
+            req.setAttribute("result", "Cliente cadastrado com sucesso!");
         }else{
-            return "Erro ao cadastrar cliente!";
+            req.setAttribute("result", "Erro ao cadastrar cliente!");
         }
+        
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/home/alugar");
+        requestDispatcher.forward(req, resp);
     }
     
     @RequestMapping(value = "/Aluguel", method = RequestMethod.POST)
-    public String addAluguel(Aluguel a, ModelAndView model){
+    public void addAluguel(String cpf_cliente, int id_jogo, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         GerenciadorAluguel ga = new GerenciadorAluguel();
+        GerenciadorCliente gc = new GerenciadorCliente();
+        GerenciadorGame gg = new GerenciadorGame();
+        Cliente cliente = gc.findByCPF(cpf_cliente);
+        Game game = gg.buscar(id_jogo);
+        Aluguel a = new Aluguel(cliente, game, LocalDate.now());
         boolean add = ga.add(a);
         if (add){
-            model.addObject("result", "Jogo alugado com sucesso!");
-            ga.alugar(a);
+            if(ga.alugar(a)){
+                req.setAttribute("result", "Jogo alugado com sucesso!");
+            }else{
+                req.setAttribute("result", "Jogo já foi alugado!");
+            }
         }else{
-            model.addObject("result", "Erro ao alugar jogo!");
+            req.setAttribute("result", "Erro ao alugar jogo!");
         }
-        return null;
+        
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/home/alugar");
+        requestDispatcher.forward(req, res);
     }
 }

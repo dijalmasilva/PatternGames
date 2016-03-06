@@ -9,8 +9,13 @@ import dijalmasilva.businesspattern.enums.TipoAluguel;
 import dijalmasilva.businesspattern.interfaces.DevolverStrategy;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,20 +31,19 @@ import javax.persistence.Transient;
  * @author Dijalma Silva <dijalmacz@gmail.com>
  */
 @Entity
+@Access(AccessType.FIELD)
 public class Aluguel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @OneToOne
+    @OneToOne(optional = false, cascade = CascadeType.MERGE)
     private Cliente cliente;
-    @OneToOne
+    @OneToOne(optional = false, cascade = CascadeType.MERGE)
     private Game game;
-    @Temporal(TemporalType.DATE)
-    @Convert
+    @Temporal(value = TemporalType.DATE)
     private LocalDate dataDoAluguel;
-    @Temporal(TemporalType.DATE)
-    @Convert
+    @Temporal(value = TemporalType.DATE)
     private LocalDate dataDeDevolucao;
     @Transient
     private TipoAluguel tipoDeAluguel;
@@ -154,6 +158,11 @@ public class Aluguel implements Serializable {
 
     public void setStrategy(DevolverStrategy strategy) {
         this.strategy = strategy;
+    }
+    
+    @Override
+    public String toString() {
+        return "Aluguel{" + "id=" + id + ", cliente=" + cliente + ", game=" + game + ", dataDoAluguel=" + dataDoAluguel + ", dataDeDevolucao=" + dataDeDevolucao + ", tipoDeAluguel=" + tipoDeAluguel + ", strategy=" + strategy + '}';
     }
     
     

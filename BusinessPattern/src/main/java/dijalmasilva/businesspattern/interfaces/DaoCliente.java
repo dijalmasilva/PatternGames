@@ -21,4 +21,6 @@ public interface DaoCliente {
     Cliente buscar(int id);
     
     List<Cliente> todos();
+    
+    Cliente buscarPorCPF(String cpf);
 }

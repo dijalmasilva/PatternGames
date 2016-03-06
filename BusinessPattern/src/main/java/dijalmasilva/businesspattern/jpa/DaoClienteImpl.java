@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  * 
@@ -64,5 +65,12 @@ public class DaoClienteImpl implements DaoCliente{
     private void closeAll(){
         em.close();
         factory.close();
+    }
+
+    @Override
+    public Cliente buscarPorCPF(String cpf) {
+        Query query = em.createQuery("SELECT c from Cliente c where c.cpf = :cpfCliente", Cliente.class);
+        query.setParameter("cpfCliente", cpf);
+        return (Cliente) query.getSingleResult();
     }
 }

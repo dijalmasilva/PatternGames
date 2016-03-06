@@ -41,4 +41,10 @@ public class GerenciadorCliente {
         DaoCliente dc = factory.criaDaoCliente();
         return dc.todos();
     }
+    
+    public Cliente findByCPF(String cpf){
+        Factory factory = CreateFactory.create();
+        DaoCliente dc = factory.criaDaoCliente();
+        return dc.buscarPorCPF(cpf);
+    }
 }

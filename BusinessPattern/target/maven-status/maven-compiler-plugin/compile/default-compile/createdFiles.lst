@@ -4,7 +4,6 @@ dijalmasilva/businesspattern/factory/Factory.class
 dijalmasilva/businesspattern/entidades/CalculadoraDeDatas.class
 dijalmasilva/businesspattern/jpa/DaoClienteImpl.class
 dijalmasilva/businesspattern/entidades/Cliente.class
-dijalmasilva/businesspattern/entidades/ConvertDate.class
 dijalmasilva/businesspattern/entidades/Aluguel$1.class
 dijalmasilva/businesspattern/interfaces/DevolverStrategy.class
 dijalmasilva/businesspattern/interfaces/JogoState.class
@@ -25,5 +24,6 @@ dijalmasilva/businesspattern/enums/TipoAluguel.class
 dijalmasilva/businesspattern/enums/JogoEstado.class
 dijalmasilva/businesspattern/interfaces/Observer.class
 dijalmasilva/businesspattern/jpa/DaoGameImpl.class
+dijalmasilva/businesspattern/entidades/LocalDateConverter.class
 dijalmasilva/businesspattern/interfaces/Observable.class
 dijalmasilva/businesspattern/entidades/GameListener.class

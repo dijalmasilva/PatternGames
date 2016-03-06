@@ -33,7 +33,7 @@ public class CentralController {
     public String rent(HttpServletRequest request){
         GerenciadorCliente gc = new GerenciadorCliente();
         GerenciadorGame gg = new GerenciadorGame();
-        request.getSession().setAttribute("Games", gg.listarTodos());
+        request.getSession().setAttribute("Games", gg.disponiveis());
         request.getSession().setAttribute("Clientes", gc.all());
         Aluguel a = new Aluguel();
         GerenciadorAluguel ga = new GerenciadorAluguel();
@@ -46,7 +46,7 @@ public class CentralController {
     public String returning(HttpServletRequest request){
         GerenciadorGame gg = new GerenciadorGame();
         List<Game> devoGames = gg.toReturn();
-        request.getSession().setAttribute("gamesParaDevolucao", gg);
+        request.getSession().setAttribute("gamesParaDevolucao", devoGames);
         return "devolver";
     }
     

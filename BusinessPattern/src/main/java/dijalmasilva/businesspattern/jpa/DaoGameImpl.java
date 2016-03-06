@@ -12,7 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import dijalmasilva.businesspattern.interfaces.DaoGame;
-import javax.persistence.Query;
 
 /**
  * 
@@ -64,5 +63,25 @@ public class DaoGameImpl implements DaoGame{
     private void closeAll(){
         em.close();
         factory.close();
+    }
+
+    @Override
+    public List<Game> alugados() {
+        return em.createNativeQuery("select * from game where estado = 'ALUGADO'", Game.class).getResultList();
+    }
+
+    @Override
+    public List<Game> disponiveis() {
+        return em.createNativeQuery("select * from game where estado = 'DISPONIVEL'", Game.class).getResultList();
+    }
+
+    @Override
+    public boolean atualizar(Game g, int id) {
+        Game find = em.find(Game.class, id);
+        find = g;
+        em.getTransaction().begin();
+        em.refresh(find);
+        em.getTransaction().commit();
+        return true;
     }
 }

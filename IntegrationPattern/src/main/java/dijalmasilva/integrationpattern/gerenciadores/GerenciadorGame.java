@@ -53,10 +53,22 @@ public class GerenciadorGame {
         return dao.salvar(g);
     }
     
+    public List<Game> alugados(){
+        Factory factory = CreateFactory.create();
+        DaoGame dao = factory.criaDaoGame();
+        return dao.alugados();
+    }
+    
+    public List<Game> disponiveis(){
+        Factory factory = CreateFactory.create();
+        DaoGame dao = factory.criaDaoGame();
+        return dao.disponiveis();
+    }
+    
     public boolean alugar(Game game){
         try{
             game.alugar();
-            return true;
+            return atualizar(game, game.getId());
         }catch(OperationException ex){
             System.out.println(ex);
             return false;
@@ -82,5 +94,11 @@ public class GerenciadorGame {
         });
         
         return devoGames;
+    }
+    
+    public boolean atualizar(Game g, int id){
+        Factory factory = CreateFactory.create();
+        DaoGame dao = factory.criaDaoGame();
+        return dao.atualizar(g, id);
     }
 }
