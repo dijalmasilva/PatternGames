@@ -43,6 +43,7 @@ public class Game implements Serializable{
     private JogoEstado estado;
 
     public Game() {
+        this.estado = JogoEstado.DISPONIVEL;
     }
 
     public Game(String nome, String genero, List<Cliente> observadores) {

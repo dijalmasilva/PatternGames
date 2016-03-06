@@ -13,6 +13,9 @@
         <div class="dj-modal__section">
             <h2 class="dj-titulo__left">Novo jogo</h2>
             <br>
+            <div>
+                <h3>${result}</h3>
+            </div>
             <form action="/novo/Jogo" method="post" class="form-group">
                 <div class="dj-form__input">
                     <label for="nome">Nome:</label>

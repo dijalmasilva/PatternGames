@@ -115,7 +115,7 @@
                     <h5>Data de devolução: ${dataDevolucaoFormatada}</h5>
                     <br>
                     <div class="text-right dj-button__submit">
-                        <button class="btn btn-primary btn-lg" value="Alugar" onclick="submeterAluguel()" <c:if test="${Clientes == null}">disabled=""</c:if>><br><br>
+                        <button class="btn btn-primary btn-lg" value="Alugar" onclick="submeterAluguel()" <c:if test="${Clientes == null}">disabled=""</c:if>>Alugar</button><br><br>
                     </div>
                 </c:otherwise>
             </c:choose>

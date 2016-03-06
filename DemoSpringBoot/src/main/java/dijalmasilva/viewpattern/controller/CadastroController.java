@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 
@@ -31,28 +30,29 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/novo")
 public class CadastroController {
 
-    @RequestMapping(value = "/Game", method = RequestMethod.POST)
-    public String addGame(Game g, ModelAndView model){
+    @RequestMapping(value = "/Jogo", method = RequestMethod.POST)
+    public void addGame(Game g, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         GerenciadorGame gg = new GerenciadorGame();
+        
         if(gg.salvar(g)){
-            model.addObject("result", "Jogo cadastrado com sucesso!");
+            req.setAttribute("result", "Jogo cadastrado com sucesso!");
         }else{
-            model.addObject("result", "Erro ao cadastrar o jogo!");
+            req.setAttribute("result", "Erro ao cadastrar o jogo!");
         }
         
-        return null;
+        req.getRequestDispatcher("/home/novoJogo").forward(req, res); 
     }
     
     @RequestMapping(value = "/Cliente", method = RequestMethod.POST)
-    public String addCliente(Cliente c, ModelAndView model){
+    public void addCliente(Cliente c, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         GerenciadorCliente gc = new GerenciadorCliente();
         if (gc.addCliente(c)){
-            model.addObject("result", "Cliente cadastrado com sucesso!");
+            req.setAttribute("result", "Cliente cadastrado com sucesso!");
         }else{
-            model.addObject("result", "Erro ao cadastrar cliente!");
+            req.setAttribute("result", "Erro ao cadastrar cliente!");
         }
         
-        return null;
+        req.getRequestDispatcher("/home/novoCliente").forward(req, res);
     }
     
     @RequestMapping(value = "/ClienteFast", method = RequestMethod.POST)

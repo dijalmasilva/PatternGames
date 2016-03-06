@@ -18,7 +18,7 @@
                         <h2>Atenção!</h2>
                     </div>
                     <br>
-                    <h4>Ainda não há jogos cadastrados. Clique <a href="#">aqui</a> para
+                    <h4>Ainda não há jogos cadastrados. Clique <a href="/novoJogo">aqui</a> para
                         cadastrar!</h4>
                     </c:when>
                     <c:otherwise>
@@ -26,7 +26,7 @@
                     <br>
                     <c:choose>
                         <c:when test="${clientes == null}">
-                            <h4>Ainda não há clientes cadastrados. Clique <a href="novoCliente.jsp">aqui</a> para
+                            <h4>Ainda não há clientes cadastrados. Clique <a href="/novoCliente">aqui</a> para
                                 cadastrar!</h4>
                             <br>
                         </c:when>
