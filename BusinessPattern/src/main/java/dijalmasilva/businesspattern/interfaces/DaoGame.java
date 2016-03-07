@@ -18,6 +18,8 @@ public interface DaoGame {
     
     boolean remover(Game g);
     
+    boolean atualizar(Game g);
+    
     boolean atualizar(Game g, int id);
     
     List<Game> todos();

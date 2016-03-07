@@ -39,7 +39,7 @@
                             </div><br>
                             <div class="form-group dj-form__input">
                                 <label for="buscar">Buscar cliente:</label>
-                                <input class="form-control" id="buscar" name="buscar" autofocus="">
+                                <input class="form-control" id="searchClient" name="buscar" autofocus="">
                                 <div class="text-right">
                                     <button data-toggle="modal" data-target="#modal" class="btn btn-default btn-sm">Novo Cliente</button>
                                 </div>
@@ -55,9 +55,9 @@
                                             <th>CPF</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="cbody">
                                         <c:forEach items="${Clientes}" var="cliente">
-                                            <tr onclick="setarCliente('${cliente.cpf}')">
+                                            <tr onclick="setarCliente('${cliente.cpf}', this)">
                                                 <td>${cliente.nome}</td>
                                                 <td>${cliente.email}</td>
                                                 <td>${cliente.cpf}</td>
@@ -71,11 +71,11 @@
                     </c:choose>
                     <div class="form-group dj-form__input">
                         <label for="buscar">Buscar jogo:</label>
-                        <input class="form-control" id="buscar" name="buscar" autofocus="">
+                        <input class="form-control" id="searchGame" name="buscar" autofocus="">
                     </div>
                     <div class="text-left dj-table">
                         <h3>Jogos</h3>
-                        <table class="table table-hover">
+                        <table class="table table-hover dj-table__overflow">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -83,9 +83,9 @@
                                     <th>Gênero</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="gbody">
                                 <c:forEach items="${Games}" var="game">
-                                    <tr onclick="setarGame(${game.id})">
+                                    <tr onclick="setarGame(${game.id}, this)">
                                         <td>${game.id}</td>
                                         <td>${game.nome}</td>
                                         <td>${game.genero}</td>

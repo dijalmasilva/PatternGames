@@ -13,7 +13,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 /**
  * 
@@ -57,7 +56,7 @@ public class DaoClienteImpl implements DaoCliente{
 
     @Override
     public List<Cliente> todos() {
-        Query createQuery = em.createNativeQuery("select * from cliente", Cliente.class);
+        Query createQuery = em.createNativeQuery("select * from cliente order by nome", Cliente.class);
 //        closeAll();
         return createQuery.getResultList();
     }

@@ -17,6 +17,7 @@ import dijalmasilva.businesspattern.interfaces.DaoGame;
  * 
  * @author Dijalma Silva <dijalmacz@gmail.com>
  */
+
 public class DaoGameImpl implements DaoGame{
 
     private final EntityManagerFactory factory;
@@ -27,19 +28,14 @@ public class DaoGameImpl implements DaoGame{
         this.em = factory.createEntityManager();
     }
 
-    
     @Override
     public List<Game> todos() {
-        List resultList = em.createNativeQuery("select * from game", Game.class).getResultList();
-//        closeAll();
-        return resultList;
+        return em.createNativeQuery("select * from game order by nome", Game.class).getResultList();
     }
 
     @Override
     public Game buscar(int id) {
-        Game g = em.find(Game.class, id);
-//        closeAll();
-        return g;
+        return em.find(Game.class, id);
     }
 
     @Override
@@ -47,7 +43,6 @@ public class DaoGameImpl implements DaoGame{
         em.getTransaction().begin();
         em.persist(g);
         em.getTransaction().commit();
-//        closeAll();
         return true;
     }
 
@@ -56,13 +51,7 @@ public class DaoGameImpl implements DaoGame{
         em.getTransaction().begin();
         em.remove(em.merge(g));
         em.getTransaction().commit();
-//        closeAll();
         return true;
-    }
-
-    private void closeAll(){
-        em.close();
-        factory.close();
     }
 
     @Override
@@ -76,11 +65,19 @@ public class DaoGameImpl implements DaoGame{
     }
 
     @Override
+    public boolean atualizar(Game g) {
+        em.getTransaction().begin();
+        em.merge(g);
+        em.getTransaction().commit();
+        return true;
+    }
+
+    @Override
     public boolean atualizar(Game g, int id) {
-        Game find = em.find(Game.class, id);
+        Game find = buscar(id);
         find = g;
         em.getTransaction().begin();
-        em.refresh(find);
+        em.merge(find);
         em.getTransaction().commit();
         return true;
     }

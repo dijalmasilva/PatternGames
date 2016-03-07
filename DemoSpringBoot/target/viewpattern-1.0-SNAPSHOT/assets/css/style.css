@@ -74,3 +74,8 @@ ul li {
     width: 90%;
     margin: 0 auto;
 }
+
+.dj-table__overflow{
+    overflow: auto;
+    height: 300px !important;
+}

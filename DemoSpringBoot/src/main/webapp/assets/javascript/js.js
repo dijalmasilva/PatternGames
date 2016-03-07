@@ -7,6 +7,80 @@
 
 $(document).ready(function () {
 
+    //filtro na tabela de clientes cadastrados
+    $("#searchClient").keyup(function () {
+        //split the current value of searchInput
+        var data = this.value.split(" ");
+        //create a jquery object of the rows
+        var jo = $("#cbody").find("tr");
+        if (this.value == "") {
+            jo.show();
+            return;
+        }
+        //hide all the rows
+        jo.hide();
+
+        //Recusively filter the jquery object to get results.
+        jo.filter(function (i, v) {
+            var $t = $(this);
+            for (var d = 0; d < data.length; ++d) {
+                if ($t.is(":contains('" + data[d] + "')")) {
+                    return true;
+                }
+            }
+            return false;
+        })
+                //show the rows that match.
+                .show();
+    }).focus(function () {
+        this.value = "";
+        $(this).css({
+            "color": "black"
+        });
+        $(this).unbind('focus');
+    }).css({
+        "color": "#C0C0C0"
+    });
+    
+    //Filtro na tabela de jogos disponíveis
+    $("#searchGame").keyup(function () {
+        //split the current value of searchInput
+        var data = this.value.split(" ");
+        //create a jquery object of the rows
+        var jo = $("#gbody").find("tr");
+        if (this.value == "") {
+            jo.show();
+            return;
+        }
+        //hide all the rows
+        jo.hide();
+
+        //Recusively filter the jquery object to get results.
+        jo.filter(function (i, v) {
+            var $t = $(this);
+            for (var d = 0; d < data.length; ++d) {
+                if ($t.is(":contains('" + data[d] + "')")) {
+                    return true;
+                }
+            }
+            return false;
+        })
+                //show the rows that match.
+                .show();
+    }).focus(function () {
+        this.value = "";
+        $(this).css({
+            "color": "black"
+        });
+        $(this).unbind('focus');
+    }).css({
+        "color": "#C0C0C0"
+    });
+    
+    $('tr').css({
+        cursor: 'pointer'
+    });
+    
 });
 
 function cadastrarCliente() {
@@ -14,7 +88,7 @@ function cadastrarCliente() {
     formulario.onsubmit = function (event) {
         event.preventDefault();
         var formData = new FormData(document.getElementById('formCliente'));
-        
+
 //        $.ajax({
 //            processData: false,
 //            cache: false,
@@ -44,16 +118,40 @@ function cadastrarCliente() {
 //    formData.append("cpf", cpf);
 //    formData.append("email", email);
 
-function setarCliente(cpf){
-    $('#cpf_cliente').val(cpf+"");
-    console.log("Cpf setado: " + cpf);
+function setarCliente(cpf, tr) {
+    clearSelectedRowClient();
+    $('#cpf_cliente').val(cpf + "");
+    $(tr).css({
+        background: '#E5E5E5',
+        cursor: 'default'
+    });
 }
 
-function setarGame(id){
+function setarGame(id, tr) {
+    clearSelectedRowGame();
     $('#id_jogo').val(id);
-    console.log("Id_game setado: " + id);
+    $(tr).css({
+        background: '#E5E5E5',
+        cursor: 'default'
+    });
 }
 
-function submeterAluguel(){
+function submeterAluguel() {
     $('#submeterAluguel').trigger("click");
+}
+
+function clearSelectedRowClient(){
+    var j = $('#cbody').find('tr');
+    j.css({
+       background: 'white',
+       cursor: 'pointer'
+    });
+}
+
+function clearSelectedRowGame(){
+    var j = $('#gbody').find('tr');
+    j.css({
+       background: 'white',
+       cursor: 'pointer'
+    });
 }
