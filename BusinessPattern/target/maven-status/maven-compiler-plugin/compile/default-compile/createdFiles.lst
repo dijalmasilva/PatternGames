@@ -7,6 +7,7 @@ dijalmasilva/businesspattern/entidades/Cliente.class
 dijalmasilva/businesspattern/entidades/Aluguel$1.class
 dijalmasilva/businesspattern/interfaces/DevolverStrategy.class
 dijalmasilva/businesspattern/interfaces/JogoState.class
+dijalmasilva/businesspattern/entidades/EmailImpl.class
 dijalmasilva/businesspattern/interfaces/DaoAluguel.class
 dijalmasilva/businesspattern/enums/JogoEstado$1.class
 dijalmasilva/businesspattern/exceptions/OperationException.class

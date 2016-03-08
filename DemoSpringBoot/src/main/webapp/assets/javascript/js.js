@@ -7,6 +7,7 @@
 
 $(document).ready(function () {
 
+    $('#showModal').trigger('click');
     //filtro na tabela de clientes cadastrados
     $("#searchClient").keyup(function () {
         //split the current value of searchInput
@@ -138,6 +139,14 @@ function setarGame(id, tr) {
 
 function submeterAluguel() {
     $('#submeterAluguel').trigger("click");
+}
+
+function observar() {
+    $('#observar').trigger("click");
+}
+
+function devolver() {
+    $('#devolver').trigger("click");
 }
 
 function clearSelectedRowClient(){

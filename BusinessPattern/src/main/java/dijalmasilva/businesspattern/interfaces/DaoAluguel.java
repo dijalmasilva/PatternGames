@@ -20,5 +20,9 @@ public interface DaoAluguel {
     
     Aluguel buscar(int id);
     
+    Aluguel buscarPorGame(int id_game);
+    
+    Aluguel buscarPorGameAndCliente(int id_game, int id_cliente);
+    
     List<Aluguel> todos();
 }

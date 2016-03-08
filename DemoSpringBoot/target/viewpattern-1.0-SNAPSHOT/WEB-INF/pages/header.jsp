@@ -6,4 +6,7 @@
 
 <header class="dj-header">
     <h1>Pattern Games</h1>
+    <div class="text-left">
+        <h4><a href="/home" class="dj-menu__header">Início</a></h4>
+    </div>
 </header>

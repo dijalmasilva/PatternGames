@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package dijalmasilva.businesspattern.jpa;
 
 import dijalmasilva.businesspattern.entidades.Cliente;
@@ -13,12 +12,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.validation.ConstraintViolationException;
 
 /**
- * 
+ *
  * @author Dijalma Silva <dijalmacz@gmail.com>
  */
-public class DaoClienteImpl implements DaoCliente{
+public class DaoClienteImpl implements DaoCliente {
 
     private final EntityManagerFactory factory;
     private final EntityManager em;
@@ -27,15 +27,19 @@ public class DaoClienteImpl implements DaoCliente{
         this.factory = Persistence.createEntityManagerFactory("PatternGames");
         this.em = factory.createEntityManager();
     }
-    
-    
+
     @Override
     public boolean salvar(Cliente c) {
-        em.getTransaction().begin();
-        em.persist(c);
-        em.getTransaction().commit();
+        try {
+            em.getTransaction().begin();
+            em.persist(c);
+            em.getTransaction().commit();
 //        closeAll();
-        return true;
+            return true;
+        } catch (ConstraintViolationException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     @Override
@@ -61,7 +65,7 @@ public class DaoClienteImpl implements DaoCliente{
         return createQuery.getResultList();
     }
 
-    private void closeAll(){
+    private void closeAll() {
         em.close();
         factory.close();
     }

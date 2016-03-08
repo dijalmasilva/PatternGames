@@ -32,11 +32,11 @@ public class Game implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nome;
     @Column(nullable = false)
     private String genero;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinTable(name = "Observadores")
     private List<Cliente> observadores;
     @Enumerated(EnumType.STRING)
@@ -44,6 +44,7 @@ public class Game implements Serializable{
 
     public Game() {
         this.estado = JogoEstado.DISPONIVEL;
+        this.observadores = new ArrayList<>();
     }
 
     public Game(String nome, String genero, List<Cliente> observadores) {
@@ -65,6 +66,7 @@ public class Game implements Serializable{
         this.nome = nome;
         this.genero = genero;
         this.estado = estado;
+        this.observadores = new ArrayList<>();
     }
     
     public Game(String nome, String genero, List<Cliente> observadores, JogoEstado estado) {
@@ -84,10 +86,7 @@ public class Game implements Serializable{
     
     public void devolver() throws OperationException{
         this.estado =  estado.devolver();
-        GameListener listener = new GameListener(this);
-        listener.notifyObservers();
     }
-    
 
     public void alugar() throws OperationException{
         this.estado = estado.alugar();

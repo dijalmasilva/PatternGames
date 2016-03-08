@@ -6,6 +6,7 @@
 /home/dijalma/MEGA/Workspace/PatternGames/BusinessPattern/src/main/java/dijalmasilva/businesspattern/interfaces/JogoState.java
 /home/dijalma/MEGA/Workspace/PatternGames/BusinessPattern/src/main/java/dijalmasilva/businesspattern/factory/CreateFactory.java
 /home/dijalma/MEGA/Workspace/PatternGames/BusinessPattern/src/main/java/dijalmasilva/businesspattern/interfaces/Observable.java
+/home/dijalma/MEGA/Workspace/PatternGames/BusinessPattern/src/main/java/dijalmasilva/businesspattern/entidades/EmailImpl.java
 /home/dijalma/MEGA/Workspace/PatternGames/BusinessPattern/src/main/java/dijalmasilva/businesspattern/entidades/EspecialStrategy.java
 /home/dijalma/MEGA/Workspace/PatternGames/BusinessPattern/src/main/java/dijalmasilva/businesspattern/factory/Factory.java
 /home/dijalma/MEGA/Workspace/PatternGames/BusinessPattern/src/main/java/dijalmasilva/businesspattern/exceptions/OperationException.java

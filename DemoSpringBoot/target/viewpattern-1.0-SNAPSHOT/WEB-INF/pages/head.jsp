@@ -12,6 +12,6 @@
     <script src="/assets/javascript/jquery-2.1.4.min.js" type="text/javascript"></script>
     <script src="/assets/javascript/bootstrap.min.js" type="text/javascript"></script>
     <script src="/assets/javascript/js.js" type="text/javascript"></script>
-
+    <script src="/assets/javascript/cpf.js" type="text/javascript"></script>
     <title>Pattern Games</title>
 </head>

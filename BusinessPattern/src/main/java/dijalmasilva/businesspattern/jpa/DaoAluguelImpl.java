@@ -10,8 +10,9 @@ import dijalmasilva.businesspattern.interfaces.DaoAluguel;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -32,7 +33,6 @@ public class DaoAluguelImpl implements DaoAluguel {
         em.getTransaction().begin();
         em.persist(a);
         em.getTransaction().commit();
-//        closeAll();
         return true;
     }
 
@@ -41,26 +41,36 @@ public class DaoAluguelImpl implements DaoAluguel {
         em.getTransaction().begin();
         em.remove(em.merge(a));
         em.getTransaction().commit();
-//        closeAll();
         return true;
     }
 
     @Override
     public Aluguel buscar(int id) {
-        Aluguel find = em.find(Aluguel.class, id);
-//        closeAll();
-        return find;
+        return em.find(Aluguel.class, id);
     }
 
     @Override
     public List<Aluguel> todos() {
-        Query createQuery = em.createNativeQuery("select * from aluguel", Aluguel.class);
-//        closeAll();
-        return createQuery.getResultList();
+        return em.createNativeQuery("select * from aluguel", Aluguel.class).getResultList();
     }
 
-//    private void closeAll() {
-//        em.close();
-//        factory.close();
-//    }
+    @Override
+    public Aluguel buscarPorGame(int id_game) {
+        TypedQuery<Aluguel> query = em.createQuery("SELECT a FROM Aluguel a WHERE a.game.id = :id_game", Aluguel.class);
+        query.setParameter("id_game", id_game);
+        return query.getSingleResult();
+    }
+
+    @Override
+    public Aluguel buscarPorGameAndCliente(int id_game, int id_cliente) {
+        TypedQuery<Aluguel> query = em.createQuery("SELECT a FROM Aluguel a WHERE a.game.id = :id_game and a.cliente.id = :id_cliente",
+                Aluguel.class);
+        query.setParameter("id_game", id_game);
+        query.setParameter("id_cliente", id_cliente);
+        try {
+            return query.getSingleResult();
+        }catch (NoResultException ex){
+            return null;
+        }
+    }
 }

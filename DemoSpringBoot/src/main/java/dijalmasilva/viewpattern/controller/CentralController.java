@@ -11,8 +11,10 @@ import dijalmasilva.businesspattern.entidades.Game;
 import dijalmasilva.integrationpattern.gerenciadores.GerenciadorAluguel;
 import dijalmasilva.integrationpattern.gerenciadores.GerenciadorCliente;
 import dijalmasilva.integrationpattern.gerenciadores.GerenciadorGame;
-import java.util.List;
+import java.io.IOException;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -45,8 +47,7 @@ public class CentralController {
     @RequestMapping(value = "/devolver")
     public String returning(HttpServletRequest request){
         GerenciadorGame gg = new GerenciadorGame();
-        List<Game> devoGames = gg.toReturn();
-        request.getSession().setAttribute("gamesParaDevolucao", devoGames);
+        request.getSession().setAttribute("Games", gg.alugados());
         return "devolver";
     }
     
@@ -54,8 +55,8 @@ public class CentralController {
     public String observer(HttpServletRequest request){
         GerenciadorCliente gc = new GerenciadorCliente();
         GerenciadorGame gg = new GerenciadorGame();
-        request.getSession().setAttribute("games", gg.listarTodos());
-        request.getSession().setAttribute("clientes", gc.all());
+        request.getSession().setAttribute("Games", gg.alugados());
+        request.getSession().setAttribute("Clientes", gc.all());
         return "observar";
     }
     
@@ -68,5 +69,22 @@ public class CentralController {
     public String newClient(){
         return "novoCliente";
         
+    }
+    
+    @RequestMapping(value = "/devolvido")
+    public void devolver(int id_jogo, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+        GerenciadorAluguel ga = new GerenciadorAluguel();
+        Aluguel aluguel = ga.findByGameId(id_jogo);
+        
+        if (ga.atrasado(aluguel)){
+            req.setAttribute("multa", ga.calcularMulta(aluguel));
+        }
+        boolean devolucao = ga.devolver(aluguel);
+        if(devolucao){
+            req.setAttribute("result", "Jogo devolvido com sucesso!");
+        }else{
+            req.setAttribute("result", "Não foi possível devolver o jogo!");
+        }
+        req.getRequestDispatcher("/home/devolver").forward(req, res);
     }
 }

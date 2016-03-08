@@ -34,14 +34,15 @@
                             <br>
                         </c:when>
                         <c:otherwise>
-                            <div>
-                                <h3>${result}</h3>
-                            </div><br>
+                            <c:if test="${result != null}">
+                                <%@include file="modalResposta.jsp" %>
+                                <button data-toggle="modal" data-target="#modal" class="invisible" id="showModal"></button>
+                            </c:if>
                             <div class="form-group dj-form__input">
                                 <label for="buscar">Buscar cliente:</label>
                                 <input class="form-control" id="searchClient" name="buscar" autofocus="">
                                 <div class="text-right">
-                                    <button data-toggle="modal" data-target="#modal" class="btn btn-default btn-sm">Novo Cliente</button>
+                                    <button data-toggle="modal" data-target="#modalCliente" class="btn btn-default btn-sm">Novo Cliente</button>
                                 </div>
                                 <%@include file="modalCliente.jsp" %>
                             </div>
@@ -75,7 +76,7 @@
                     </div>
                     <div class="text-left dj-table">
                         <h3>Jogos</h3>
-                        <table class="table table-hover dj-table__overflow">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -100,27 +101,27 @@
                         <input type="number" name="id_jogo" id="id_jogo" value="">
                         <input type="submit" id="submeterAluguel">
                     </form>
-                    <h4>Informações complementares</h4>
-                    <c:choose>
-                        <c:when test="${dia == 'ESPECIAL'}">
-                            <h5>Valor a ser pago: 5 R$ </h5>
-                            <h5>Duração de aluguel: 2 dias </h5>
-                        </c:when>
-                        <c:otherwise>
-                            <h5>Valor a ser pago: 3 R$ </h5>
-                            <h5>Duração de aluguel: 1 dias </h5>
-                        </c:otherwise>
+                    <h3>Informações complementares</h4>
+                        <c:choose>
+                            <c:when test="${dia == 'ESPECIAL'}">
+                                <h4>Valor a ser pago: 5 R$ </h4>
+                                <h4>Duração de aluguel: 2 dias </h4>
+                            </c:when>
+                            <c:otherwise>
+                                <h4>Valor a ser pago: 3 R$ </h4>
+                                <h4>Duração de aluguel: 1 dias </h4>
+                            </c:otherwise>
 
-                    </c:choose>
-                    <h5>Data de devolução: ${dataDevolucaoFormatada}</h5>
-                    <br>
-                    <div class="text-right dj-button__submit">
-                        <button class="btn btn-primary btn-lg" value="Alugar" onclick="submeterAluguel()" <c:if test="${Clientes == null}">disabled=""</c:if>>Alugar</button><br><br>
-                    </div>
-                </c:otherwise>
-            </c:choose>
-            <br>
-            <h4><a href="/home">Voltar ao início</a></h4>
+                        </c:choose>
+                        <h4>Data de devolução: ${dataDevolucaoFormatada}</h4>
+                        <br>
+                        <div class="text-right dj-button__submit">
+                            <button class="btn btn-primary btn-lg" onclick="submeterAluguel()" <c:if test="${Clientes == null}">disabled=""</c:if>>Alugar</button><br><br>
+                            </div>
+                    </c:otherwise>
+                </c:choose>
+                <br>
+                <h4><a href="/home">Voltar ao início</a></h4>
         </div>
     </body>
 

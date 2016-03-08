@@ -13,7 +13,7 @@
         <%@include file="header.jsp" %>
         <div class="dj-modal__section">
             <c:choose>
-                <c:when test="${games == null}">
+                <c:when test="${Games == null}">
                     <div class="dj-titulo__left">
                         <h2>Atenção!</h2>
                     </div>
@@ -24,8 +24,14 @@
                     <c:otherwise>
                     <h2 class="dj-titulo__left">Observar jogo</h2>
                     <br>
+                    <div>
+                        <c:if test="${result != null}">
+                            <%@include file="modalResposta.jsp" %>
+                            <button data-toggle="modal" data-target="#modal" class="invisible" id="showModal"></button>
+                        </c:if>
+                    </div>
                     <c:choose>
-                        <c:when test="${clientes == null}">
+                        <c:when test="${Clientes == null}">
                             <h4>Ainda não há clientes cadastrados. Clique <a href="/novoCliente">aqui</a> para
                                 cadastrar!</h4>
                             <br>
@@ -33,9 +39,9 @@
                         <c:otherwise>
                             <div class="form-group dj-form__input">
                                 <label for="buscar">Buscar clinte:</label>
-                                <input class="form-control" id="buscar" name="buscar" autofocus="">
+                                <input class="form-control" id="searchClient" name="buscar" autofocus="">
                                 <div class="text-right">
-                                    <button data-toggle="modal" data-target="#modal" class="btn btn-default btn-sm">Novo Cliente</button>
+                                    <button data-toggle="modal" data-target="#modalCliente" class="btn btn-default btn-sm">Novo Cliente</button>
                                 </div>
                                 <%@include file="modalCliente.jsp" %>
                             </div>
@@ -49,9 +55,9 @@
                                             <th>CPF</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <c:forEach items="${clientes}" var="cliente">
-                                            <tr>
+                                    <tbody id="cbody">
+                                        <c:forEach items="${Clientes}" var="cliente">
+                                            <tr onclick="setarCliente('${cliente.cpf}', this)">
                                                 <td>${cliente.nome}</td>
                                                 <td>${cliente.email}</td>
                                                 <td>${cliente.cpf}</td>
@@ -65,7 +71,7 @@
                     </c:choose>
                     <div class="form-group dj-form__input">
                         <label for="buscar">Buscar jogo:</label>
-                        <input class="form-control" id="buscar" name="buscar" autofocus="">
+                        <input class="form-control" id="searchGame" name="buscar" autofocus="">
                     </div>
                     <div class="text-left dj-table">
                         <h3>Jogos</h3>
@@ -77,9 +83,9 @@
                                     <th>Gênero</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <c:forEach items="${games}" var="game">
-                                    <tr>
+                            <tbody id="gbody">
+                                <c:forEach items="${Games}" var="game">
+                                    <tr onclick="setarGame(${game.id}, this)">
                                         <td>${game.id}</td>
                                         <td>${game.nome}</td>
                                         <td>${game.genero}</td>
@@ -89,8 +95,13 @@
                         </table>
                     </div>
                     <br>
+                    <form action="/novo/Observardor" method="post" class="invisible">
+                        <input type="text" name="cpf_cliente" id="cpf_cliente" value="" required="">
+                        <input type="number" name="id_jogo" id="id_jogo" value="" required="">
+                        <input type="submit" id="observar">
+                    </form>
                     <div class="text-right dj-button__submit">
-                        <input type="submit" class="btn btn-primary btn-lg" value="Observar" <c:if test="${clientes == null}">disabled=""</c:if>><br><br>
+                        <button class="btn btn-primary btn-lg" onclick="observar()" <c:if test="${Clientes == null}">disabled=""</c:if>>Observar</button><br><br>
                         </div>
                 </c:otherwise>
             </c:choose>

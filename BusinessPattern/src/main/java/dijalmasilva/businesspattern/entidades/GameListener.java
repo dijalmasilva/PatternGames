@@ -23,6 +23,7 @@ public class GameListener implements Observable{
     public GameListener(Game game) {
         this.game = game;
         this.observadores = new ArrayList<>();
+        alteraObservers(game.getObservadores());
     }
 
     public Game getGame() {
@@ -41,7 +42,7 @@ public class GameListener implements Observable{
         this.observadores = observadores;
     }
     
-    public void alteraObservers(List<Cliente> obs){
+    public final void alteraObservers(List<Cliente> obs){
         obs.stream().forEach((c) -> {
             observadores.add(c);
         });
@@ -58,9 +59,10 @@ public class GameListener implements Observable{
     }
 
     @Override
-    public void notifyObservers() {
+    public final void notifyObservers() {
         observadores.stream().forEach((observer) -> {
             observer.update(game);
+            game.setObservadores(new ArrayList<>());
         });
     }
     

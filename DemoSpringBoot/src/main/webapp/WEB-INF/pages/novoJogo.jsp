@@ -3,7 +3,7 @@
     Created on : 24/02/2016, 11:10:52
     Author     : Dijalma Silva <dijalmacz@gmail.com>
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,16 +14,19 @@
             <h2 class="dj-titulo__left">Novo jogo</h2>
             <br>
             <div>
-                <h3>${result}</h3>
+                <c:if test="${result != null}">
+                            <%@include file="modalResposta.jsp" %>
+                            <button data-toggle="modal" data-target="#modal" class="invisible" id="showModal"></button>
+                </c:if>
             </div>
             <form action="/novo/Jogo" method="post" class="form-group">
                 <div class="dj-form__input">
                     <label for="nome">Nome:</label>
-                    <input class="form-control" name="nome" id="nome" autofocus="">
+                    <input class="form-control" name="nome" id="nome" autofocus="" required="">
                 </div><br>
                 <div class="dj-form__input">
                     <label for="genero">Gênero:</label>
-                    <input class="form-control" name="genero" id="genero">
+                    <input class="form-control" name="genero" id="genero" required="">
                 </div>
                 <div class="text-right dj-button__submit">
                     <input type="submit" class="btn btn-primary btn-lg" value="Cadastrar">

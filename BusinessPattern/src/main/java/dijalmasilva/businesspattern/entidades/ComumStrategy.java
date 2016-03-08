@@ -24,9 +24,9 @@ public class ComumStrategy implements DevolverStrategy{
         BigDecimal dias = new BigDecimal(new CalculadoraDeDatas().
                 contarDias(aluguel.getDataDeDevolucao(), LocalDate.now()));
         
-        multa.add(new BigDecimal(3).multiply(dias));
+        BigDecimal result = dias.multiply(new BigDecimal(3));
         
-        return multa;
+        return multa.add(result);
     }
 
 }

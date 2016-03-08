@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import org.hibernate.validator.constraints.br.CPF;
 
 /**
  * 
@@ -25,6 +26,7 @@ public class Cliente implements Serializable, Observer<Game>{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(nullable = false, unique = true)
+    @CPF
     private String cpf;
     @Column(nullable = false)
     private String email;
@@ -74,8 +76,12 @@ public class Cliente implements Serializable, Observer<Game>{
 
     @Override
     public void update(Game object) {
-        //Notifica cliente sobre alteração no jogo
-        System.out.println("O jogo "+object.getNome()+" está disponível!");
+        EmailImpl envio = new EmailImpl();
+        envio.sendEmail("O jogo "+object.getNome()+" está disponível!", "Sr(a). "+nome+ " venha o mais rápido possível "
+                + "para locar o jogo " + object.getNome() + ", pois o mesmo já se encontra disponível." ,this.email);
+        System.out.println("Notificando "+ nome);
+        System.out.println("O jogo "+object.getNome()+" está disponível! \n"
+                + "--------------------------------------------------------------\n");
     }
 
     @Override

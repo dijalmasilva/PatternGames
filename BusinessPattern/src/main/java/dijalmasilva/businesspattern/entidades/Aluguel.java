@@ -9,21 +9,17 @@ import dijalmasilva.businesspattern.enums.TipoAluguel;
 import dijalmasilva.businesspattern.interfaces.DevolverStrategy;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 /**
@@ -37,13 +33,13 @@ public class Aluguel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @OneToOne(optional = false, cascade = CascadeType.MERGE)
+    @OneToOne(optional = false)
     private Cliente cliente;
-    @OneToOne(optional = false, cascade = CascadeType.MERGE)
+    @OneToOne(optional = false)
     private Game game;
-    @Temporal(value = TemporalType.DATE)
+    @Convert
     private LocalDate dataDoAluguel;
-    @Temporal(value = TemporalType.DATE)
+    @Convert
     private LocalDate dataDeDevolucao;
     @Transient
     private TipoAluguel tipoDeAluguel;
@@ -66,26 +62,21 @@ public class Aluguel implements Serializable {
 
     public boolean atrasado() {
 
-        return LocalDate.now().isBefore(dataDeDevolucao);
+        return LocalDate.now().isAfter(dataDeDevolucao);
     }
 
     public BigDecimal calcularMulta() {
 
-        if (atrasado()) {
-
-            switch (tipoDeAluguel) {
-                case ESPECIAL:
-                    strategy = new EspecialStrategy();
-                    break;
-                case COMUM:
-                    strategy = new ComumStrategy();
-                    break;
-            }
-
-            return strategy.calcularMulta(this);
+        switch (tipoDeAluguel) {
+            case ESPECIAL:
+                strategy = new EspecialStrategy();
+                break;
+            case COMUM:
+                strategy = new ComumStrategy();
+                break;
         }
-        
-        return BigDecimal.ZERO;
+
+        return strategy.calcularMulta(this);
     }
 
     private void verificaTipoDeAluguel() {
@@ -159,11 +150,10 @@ public class Aluguel implements Serializable {
     public void setStrategy(DevolverStrategy strategy) {
         this.strategy = strategy;
     }
-    
+
     @Override
     public String toString() {
         return "Aluguel{" + "id=" + id + ", cliente=" + cliente + ", game=" + game + ", dataDoAluguel=" + dataDoAluguel + ", dataDeDevolucao=" + dataDeDevolucao + ", tipoDeAluguel=" + tipoDeAluguel + ", strategy=" + strategy + '}';
     }
-    
-    
+
 }

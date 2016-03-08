@@ -6,8 +6,8 @@
 
 package dijalmasilva.integrationpattern.main;
 
-import dijalmasilva.businesspattern.entidades.Game;
-import dijalmasilva.integrationpattern.gerenciadores.GerenciadorGame;
+import dijalmasilva.businesspattern.entidades.Aluguel;
+import dijalmasilva.integrationpattern.gerenciadores.GerenciadorAluguel;
 
 /**
  * 
@@ -16,8 +16,11 @@ import dijalmasilva.integrationpattern.gerenciadores.GerenciadorGame;
 public class Loader {
 
     public static void main(String[] args) {
-        GerenciadorGame g = new GerenciadorGame();
-        Game game = new Game("FIFA 16", "Esporte");
-        g.salvar(game);
+        GerenciadorAluguel a = new GerenciadorAluguel();
+        Aluguel aluguel = a.find(1109);
+        if (a.atrasado(aluguel)){
+            System.out.println(aluguel.calcularMulta() + "R$");
+        }
+//        g.devolver(game);
     }
 }

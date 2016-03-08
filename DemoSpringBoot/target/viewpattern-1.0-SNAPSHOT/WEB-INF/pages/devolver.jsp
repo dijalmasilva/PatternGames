@@ -13,7 +13,7 @@
         <%@include file="header.jsp" %>
         <div class="dj-modal__section">
             <c:choose>
-                <c:when test="${gamesParaDevolucao == null}">
+                <c:when test="${Games == null}">
                     <div class="dj-titulo__left">
                         <h2>Atenção!</h2>
                     </div>
@@ -23,11 +23,16 @@
                     <c:otherwise>
                     <h2 class="dj-titulo__left">Devolução</h2>
                     <br>
+                    <div>
+                        <c:if test="${result != null}">
+                            <%@include file="modalDevolucao.jsp" %>
+                            <button data-toggle="modal" data-target="#modal" class="invisible" id="showModal"></button>
+                        </c:if>
+                    </div>
                     <div class="form-group dj-form__input">
                         <label for="buscar">Buscar jogo:</label>
-                        <input class="form-control" id="buscar" name="buscar" autofocus="">
+                        <input class="form-control" id="searchGame" name="buscar" autofocus="">
                     </div>
-                    <br><br>
                     <div class="text-left dj-table">
                         <h3>Jogos</h3>
                         <table class="table table-hover">
@@ -38,9 +43,9 @@
                                     <th>Gênero</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <c:forEach items="${games}" var="game">
-                                    <tr>
+                            <tbody id="gbody">
+                                <c:forEach items="${Games}" var="game">
+                                    <tr onclick="setarGame(${game.id}, this)">
                                         <td>${game.id}</td>
                                         <td>${game.nome}</td>
                                         <td>${game.genero}</td>
@@ -50,9 +55,13 @@
                         </table>
                     </div>
                     <br>
+                    <form action="/home/devolvido" method="post" class="invisible">
+                        <input type="number" name="id_jogo" id="id_jogo" value="" required="">
+                        <input type="submit" id="devolver">
+                    </form>
                     <div class="text-right dj-button__submit">
-                        <input type="submit" class="btn btn-primary btn-lg" value="Devolver">
-                    </div>
+                        <button class="btn btn-primary btn-lg" onclick="devolver()">Devolver</button><br><br>
+                        </div>
                 </c:otherwise>
             </c:choose>
             <br>
