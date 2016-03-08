@@ -13,7 +13,7 @@
         <%@include file="header.jsp" %>
         <div class="dj-modal__section">
             <c:choose>
-                <c:when test="${Games == null}">
+                <c:when test="${games == null}">
                     <div class="dj-titulo__left">
                         <h2>Atenção!</h2>
                     </div>
@@ -44,7 +44,7 @@
                                 </tr>
                             </thead>
                             <tbody id="gbody">
-                                <c:forEach items="${Games}" var="game">
+                                <c:forEach items="${games}" var="game">
                                     <tr onclick="setarGame(${game.id}, this)">
                                         <td>${game.id}</td>
                                         <td>${game.nome}</td>

@@ -77,7 +77,7 @@ public class Cliente implements Serializable, Observer<Game>{
     @Override
     public void update(Game object) {
         EmailImpl envio = new EmailImpl();
-        envio.sendEmail("O jogo "+object.getNome()+" está disponível!", "Sr(a). "+nome+ " venha o mais rápido possível "
+        envio.sendEmail("O jogo "+object.getNome()+" está disponível!", "Sr(a). "+nome+ " ,venha o mais rápido possível "
                 + "para locar o jogo " + object.getNome() + ", pois o mesmo já se encontra disponível." ,this.email);
         System.out.println("Notificando "+ nome);
         System.out.println("O jogo "+object.getNome()+" está disponível! \n"

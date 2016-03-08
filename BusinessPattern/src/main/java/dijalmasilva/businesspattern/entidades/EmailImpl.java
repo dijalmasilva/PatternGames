@@ -5,9 +5,6 @@
  */
 package dijalmasilva.businesspattern.entidades;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
@@ -43,9 +40,13 @@ public class EmailImpl {
 
     public final void initConfiguration() {
         try {
+            email.setDebug(true);
             email.setHostName(hostName);
+            email.setSmtpPort(port);
             email.setAuthentication(emailPrincipal, senha);
+            email.setSSL(true);
             email.setSSLOnConnect(true);
+            email.setStartTLSEnabled(true);
             email.setFrom(emailPrincipal);
         } catch (EmailException ex) {
             ex.printStackTrace();

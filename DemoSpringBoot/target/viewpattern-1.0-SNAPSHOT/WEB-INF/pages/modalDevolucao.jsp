@@ -18,7 +18,7 @@
             <div class="modal-body">
                 <h4>${result}</h4>
                 <c:if test="${multa != null}">
-                    <h4>Porém uma multa de ${multa} R$ foi acrescentada devido ao atraso na devolução!</h4>
+                    <h4>Porém, uma multa de ${multa} R$ foi acrescentada devido ao atraso na devolução!</h4>
                 </c:if>
             </div>
         </div>

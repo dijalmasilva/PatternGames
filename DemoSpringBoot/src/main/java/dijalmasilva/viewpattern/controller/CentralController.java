@@ -35,8 +35,8 @@ public class CentralController {
     public String rent(HttpServletRequest request){
         GerenciadorCliente gc = new GerenciadorCliente();
         GerenciadorGame gg = new GerenciadorGame();
-        request.getSession().setAttribute("Games", gg.disponiveis());
-        request.getSession().setAttribute("Clientes", gc.all());
+        request.getSession().setAttribute("games", gg.disponiveis());
+        request.getSession().setAttribute("clientes", gc.all());
         Aluguel a = new Aluguel();
         GerenciadorAluguel ga = new GerenciadorAluguel();
         request.setAttribute("dia", ga.tipoDeAluguel(a).toString());
@@ -47,7 +47,7 @@ public class CentralController {
     @RequestMapping(value = "/devolver")
     public String returning(HttpServletRequest request){
         GerenciadorGame gg = new GerenciadorGame();
-        request.getSession().setAttribute("Games", gg.alugados());
+        request.getSession().setAttribute("games", gg.alugados());
         return "devolver";
     }
     
@@ -55,8 +55,8 @@ public class CentralController {
     public String observer(HttpServletRequest request){
         GerenciadorCliente gc = new GerenciadorCliente();
         GerenciadorGame gg = new GerenciadorGame();
-        request.getSession().setAttribute("Games", gg.alugados());
-        request.getSession().setAttribute("Clientes", gc.all());
+        request.getSession().setAttribute("games", gg.alugados());
+        request.getSession().setAttribute("clientes", gc.all());
         return "observar";
     }
     
@@ -75,8 +75,10 @@ public class CentralController {
     public void devolver(int id_jogo, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         GerenciadorAluguel ga = new GerenciadorAluguel();
         Aluguel aluguel = ga.findByGameId(id_jogo);
-        
+        System.out.println(aluguel.getDataDeDevolucao());
         if (ga.atrasado(aluguel)){
+            System.out.println("Atrasado!");
+            System.out.println("Multa de: " + ga.calcularMulta(aluguel)+ "R$");
             req.setAttribute("multa", ga.calcularMulta(aluguel));
         }
         boolean devolucao = ga.devolver(aluguel);

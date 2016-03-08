@@ -13,12 +13,12 @@
         <%@include file="header.jsp" %>
         <div class="dj-modal__section">
             <c:choose>
-                <c:when test="${Games == null}">
+                <c:when test="${games == null}">
                     <div class="dj-titulo__left">
                         <h2>Atenção!</h2>
                     </div>
                     <br>
-                    <h4>Ainda não há jogos cadastrados. Clique <a href="/novoJogo">aqui</a> para
+                    <h4>Não há jogos para serem observados. Clique <a href="/novoJogo">aqui</a> para
                         cadastrar!</h4>
                     </c:when>
                     <c:otherwise>
@@ -31,7 +31,7 @@
                         </c:if>
                     </div>
                     <c:choose>
-                        <c:when test="${Clientes == null}">
+                        <c:when test="${clientes == null}">
                             <h4>Ainda não há clientes cadastrados. Clique <a href="/novoCliente">aqui</a> para
                                 cadastrar!</h4>
                             <br>
@@ -56,7 +56,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="cbody">
-                                        <c:forEach items="${Clientes}" var="cliente">
+                                        <c:forEach items="${clientes}" var="cliente">
                                             <tr onclick="setarCliente('${cliente.cpf}', this)">
                                                 <td>${cliente.nome}</td>
                                                 <td>${cliente.email}</td>
@@ -84,7 +84,7 @@
                                 </tr>
                             </thead>
                             <tbody id="gbody">
-                                <c:forEach items="${Games}" var="game">
+                                <c:forEach items="${games}" var="game">
                                     <tr onclick="setarGame(${game.id}, this)">
                                         <td>${game.id}</td>
                                         <td>${game.nome}</td>
@@ -101,7 +101,7 @@
                         <input type="submit" id="observar">
                     </form>
                     <div class="text-right dj-button__submit">
-                        <button class="btn btn-primary btn-lg" onclick="observar()" <c:if test="${Clientes == null}">disabled=""</c:if>>Observar</button><br><br>
+                        <button class="btn btn-primary btn-lg" onclick="observar()" <c:if test="${clientes == null}">disabled=""</c:if>>Observar</button><br><br>
                         </div>
                 </c:otherwise>
             </c:choose>
